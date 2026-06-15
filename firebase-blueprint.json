@@ -1,0 +1,27 @@
+{
+  "entities": {
+    "MatchResult": {
+      "title": "MatchResult",
+      "description": "Records the outcome of a finished Shapoopy match",
+      "type": "object",
+      "properties": {
+        "roomId": { "type": "string" },
+        "winnerId": { "type": "string" },
+        "winnerName": { "type": "string" },
+        "winningScore": { "type": "number" },
+        "players": { 
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "createdAt": { "type": "string", "format": "timestamp" }
+      },
+      "required": ["roomId", "winnerId", "winnerName", "winningScore", "players", "createdAt"]
+    }
+  },
+  "firestore": {
+    "matches/{matchId}": {
+      "schema": { "$ref": "#/entities/MatchResult" },
+      "description": "Collection of completed matches for the global leaderboard"
+    }
+  }
+}

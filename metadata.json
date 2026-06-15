@@ -1,0 +1,6 @@
+{
+  "name": "Shapoopy",
+  "description": "A real-time multiplayer hidden-information card game similar to Rat-A-Tat Cat or Golf.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
