@@ -51,30 +51,32 @@ export default function CardView({ card, faceDown = false, className, onClick }:
         <div className={cn("absolute inset-0 backface-hidden bg-slate-900 rounded-xl shadow-2xl border border-white/20 overflow-hidden flex flex-col p-2", isRed ? "text-red-500" : "text-slate-100")}>
           <div className="flex gap-1 items-center leading-none">
             <span className="text-sm sm:text-base font-bold">{valueDisplay}</span>
-            <span className="text-[10px] sm:text-xs">{suitSymbol}</span>
+            <span className="text-[10px] sm:text-xs opacity-50">{suitSymbol}</span>
           </div>
           
-          <div className="flex-1 flex items-center justify-center">
+          <div className="flex-1 flex items-center justify-center text-4xl sm:text-5xl font-black opacity-90 drop-shadow-md">
             {card.suit === 'joker' ? (
-              <span className="text-3xl rotate-12">🃏</span>
+              <span className="rotate-12 drop-shadow-xl text-5xl">🃏</span>
             ) : (
-              <span className="text-3xl sm:text-4xl text-inherit">{suitSymbol}</span>
+              <span>{valueDisplay}</span>
             )}
           </div>
 
           <div className="flex gap-1 items-center leading-none self-end flex-row-reverse rotate-180">
             <span className="text-sm sm:text-base font-bold">{valueDisplay}</span>
-            <span className="text-[10px] sm:text-xs">{suitSymbol}</span>
+            <span className="text-[10px] sm:text-xs opacity-50">{suitSymbol}</span>
           </div>
         </div>
 
         {/* Back */}
-        <div className="absolute inset-0 backface-hidden bg-indigo-700 rounded-xl shadow-2xl border-2 border-white/30 rotate-y-180 overflow-hidden relative">
-          <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white via-transparent to-transparent"></div>
-          <div className="h-full w-full flex items-center justify-center relative z-10">
-             <div className="w-8 h-8 sm:w-10 sm:h-10 border-2 border-white/30 rounded-full rotate-45"></div>
+        <div className="absolute inset-0 backface-hidden bg-gradient-to-br from-indigo-600 to-indigo-900 rounded-xl shadow-2xl border-2 border-white/20 rotate-y-180 overflow-hidden relative">
+          <div className="absolute inset-0 opacity-30 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-white via-transparent to-transparent"></div>
+          <div className="h-full w-full flex items-center justify-center relative z-10 p-2 sm:p-3">
+             <div className="w-full h-full border border-white/20 rounded-lg flex items-center justify-center bg-white/5 backdrop-blur-sm">
+                 <div className="w-6 h-8 sm:w-8 sm:h-12 border border-white/10 rounded-sm"></div>
+             </div>
           </div>
-          <div className="absolute inset-0 border-8 border-white/10 z-0 pointer-events-none"></div>
+          <div className="absolute inset-0 border-[6px] border-indigo-900/40 z-0 pointer-events-none rounded-xl"></div>
         </div>
       </motion.div>
     </motion.div>
