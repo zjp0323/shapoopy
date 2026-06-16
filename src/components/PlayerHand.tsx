@@ -19,7 +19,14 @@ export default function PlayerHand({ player, isMe, active, status, onCardClick }
   
   const handSize = player.hand.length;
   
-  const shouldFaceDown = status !== 'scoring' && !(status === 'memorization' && isMe && !player.isReady);
+  const checkShouldFaceDown = (idx: number) => {
+    if (status === 'scoring') return false;
+    if (status === 'memorization' && isMe && !player.isReady) {
+      // In a 2-col grid for 4 cards, indices 0 and 1 are the top two, 2 and 3 are bottom two.
+      return idx < 2; // Top cards face down, bottom ones face up
+    }
+    return true;
+  };
 
   return (
     <div className={cn("relative flex flex-col items-center", active ? "scale-105 transition-transform" : "")}>
@@ -33,12 +40,12 @@ export default function PlayerHand({ player, isMe, active, status, onCardClick }
 
       {/* Hand Container */}
       <div className={cn("p-4 rounded-3xl relative", isMe ? "bg-white/5 border border-white/10 shadow-inner backdrop-blur-sm" : "")}>
-        <div className="flex flex-wrap justify-center gap-2 sm:gap-3 max-w-[280px] sm:max-w-[400px]">
+        <div className="grid grid-cols-2 gap-2 sm:gap-3">
           {player.hand.map((card, idx) => (
             <CardView 
               key={`${player.id}-slot-${idx}`} 
               card={card} 
-              faceDown={card ? shouldFaceDown : false}
+              faceDown={card ? checkShouldFaceDown(idx) : false}
               onClick={() => onCardClick?.(idx)}
               className={cn(
                 isMe && status === 'playing' && card ? "hover:-translate-y-2 hover:shadow-2xl hover:ring-2 hover:ring-emerald-400 transition-all duration-200" : ""
